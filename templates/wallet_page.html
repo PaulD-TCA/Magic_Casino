@@ -1,7 +1,29 @@
 {% include 'navbar.html' %}
 
+<br>
 
-<p>la page du porte feuille</p>
+<h1>la page du porte feuille</h1>
+
+<br><br>
+
+<form method="POST">
+<input type="submit" value="Créer une collection" name="create">
+</form>
+<br><br><br>
+
+
+<form method="POST">
+<div><label>Entrez le sujet de votre recheche: <input type="text" name="read"></label></div>
+<input type="submit" value="Submit">
+</form>
+
+<form method="POST">
+<input type="submit" value="Lire la collection" name="read">
+</form>
+
+<form method="POST">
+<input type="submit" value="Mettre à jour" name="update">
+</form>
 
 
 {% include 'footer.html' %}

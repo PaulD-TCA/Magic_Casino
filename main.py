@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 
 import pymongo
 
@@ -27,7 +27,7 @@ def roulette_page():
 
   db = client.test
   print(db.list_collection_names())
-  db.create_collection("collection_name")
+#  db.create_collection("collection_name")
   print(db.list_collection_names())
   
   resultat_afficher = roulette.CasinoRoulette()
@@ -37,9 +37,30 @@ def roulette_page():
 
 @app.route('/wallet', methods=['GET', 'POST'])
 def wallet_route():
+  if request.method == 'POST':
+ #   print(request.form.get('create'))
+  #  print(request.form.get('read'))
+    if request.form.get('create') == "Créer une collection":
+      print('in the create')
+      wallet.CasinoWallet().create_wallet()
 
-  wallet.CasinoWallet().create_wallet()
-  print(db.list_collection_names())
+    elif request.form.get('read') == "Lire la collection":
+      results = wallet.CasinoWallet().read_wallet()
+      print("on a lu")
+  #  create = request.form.get('create')
+  #  print(create)
+    #wallet.CasinoWallet().create_wallet()
+
+    elif request.form.get('update') == "Mettre à jour":
+      wallet.CasinoWallet().update_money()
+      print("on a mis à jour")
+
+    
+    
+    return render_template('wallet_page.html')
+
+#  wallet.CasinoWallet().create_wallet()
+ # print(db.list_collection_names())
   return render_template('wallet_page.html')
 
 
